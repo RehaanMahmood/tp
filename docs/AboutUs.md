@@ -1,9 +1,9 @@
 # About us
+Display |    Name    | Github Profile | Portfolio 
+--------|:----------:|:--------------:|:---------:
+![](https://via.placeholder.com/100.png?text=Photo) | Veer Mehta | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Rehaan Mahmood | [Github](https://github.com/RehaanMahmood) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Smeet Ronak | [Github](https://github.com/SmeetRonak) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Yi Yang | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Aarav | [Github](https://github.com/AaravBaori) | [Portfolio](docs/team/johndoe.md)
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)

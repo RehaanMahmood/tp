@@ -11,4 +11,8 @@ public class CcaManager {
         Cca cca = new Cca(ccaName);
         CCAList.add(cca);
     }
+
+    public ArrayList<Cca> getCCAList() {
+        return CCAList;
+    }
 }

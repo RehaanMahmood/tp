@@ -1,9 +1,6 @@
 package ccamanager.parser;
 
-import ccamanager.command.AddCcaCommand;
-import ccamanager.command.ExitCommand;
-import ccamanager.command.Command;
-import ccamanager.command.UnknownCommand;
+import ccamanager.command.*;
 
 /**
  * Parser — reads raw user input and returns the appropriate Command object.
@@ -29,6 +26,9 @@ public class Parser {
         case "add-cca":
             String ccaName = parts[1].replace("n/", "");
             return new AddCcaCommand(ccaName);
+
+        case "view-cca":
+            return new ViewCcaCommand();
 
         case "bye":
             return new ExitCommand();

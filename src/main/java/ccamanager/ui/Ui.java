@@ -6,24 +6,7 @@ import ccamanager.model.Resident;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Ui — the ONLY class that reads input and prints output.
- * <p>
- * ====================================================
- * FOR TEAMMATES ADDING NEW COMMANDS:
- * ====================================================
- * When your command needs to display something, add a method here.
- * NEVER use System.out.println anywhere outside this class.
- * <p>
- * Naming convention:
- * - showMessage(String msg)     → generic one-liner
- * - showError(String msg)       → error messages
- * - printCcaList(...)           → specific list display
- * - printResidentList(...)      → specific list display
- * <p>
- * Add your own print methods at the bottom of this file.
- * ====================================================
- */
+
 public class Ui {
 
     private static final String DIVIDER = "____________________________________________________________";
@@ -32,10 +15,6 @@ public class Ui {
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
-
-    // ----------------------------------------------------------------
-    // INPUT
-    // ----------------------------------------------------------------
 
     /**
      * Reads a line of input from the user.
@@ -47,9 +26,6 @@ public class Ui {
         return scanner.nextLine().trim();
     }
 
-    // ----------------------------------------------------------------
-    // GENERAL OUTPUT
-    // ----------------------------------------------------------------
 
     public void showWelcome() {
         System.out.println(DIVIDER);
@@ -86,31 +62,31 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    // ----------------------------------------------------------------
-    // CCA OUTPUT — Veer adds methods here
-    // ----------------------------------------------------------------
-
     /**
      * Prints the full list of CCAs.
      *
      * @param ccaList the list to display
      */
-    public void printCcaList(ArrayList<Cca> ccaList) {
-        // TODO (Veer): implement display of CCA list
-        throw new UnsupportedOperationException("printCcaList() not implemented yet");
+    public void showCcaList(ArrayList<Cca> ccaList) {
+        System.out.println(DIVIDER);
+        if (ccaList.isEmpty()) {
+            showMessage("There are no CCAs currently. Please add CCAs using add-cca command");
+        }
+        else {
+            System.out.println("Here is the complete list of all the CCAs :");
+            for(int i = 1; i < ccaList.size() + 1; i++ ) {
+                Cca cca = ccaList.get(i-1);
+                System.out.println(i + ". " + cca);
+            }
+        }
+        System.out.println(DIVIDER);
     }
-
-    // ----------------------------------------------------------------
-    // RESIDENT OUTPUT — Rehaan adds methods here
-    // ----------------------------------------------------------------
-
     /**
      * Prints the full list of residents.
      *
      * @param residentList the list to display
      */
     public void printResidentList(ArrayList<Resident> residentList) {
-        // TODO (Rehaan): implement display of resident list
         throw new UnsupportedOperationException("printResidentList() not implemented yet");
     }
 }

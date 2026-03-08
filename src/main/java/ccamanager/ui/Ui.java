@@ -11,6 +11,8 @@ public class Ui {
 
     private static final String DIVIDER = "____________________________________________________________";
     private final Scanner scanner;
+    private String lastMessage;
+
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -46,6 +48,7 @@ public class Ui {
      * @param message the message to display
      */
     public void showMessage(String message) {
+        lastMessage = message;
         System.out.println(DIVIDER);
         System.out.println(" " + message);
         System.out.println(DIVIDER);
@@ -56,6 +59,7 @@ public class Ui {
      * @param message the error to display
      */
     public void showError(String message) {
+        lastMessage = message;
         System.out.println(DIVIDER);
         System.out.println(" ERROR: " + message);
         System.out.println(DIVIDER);
@@ -95,5 +99,10 @@ public class Ui {
             }
         }
         System.out.println(DIVIDER);
+    }
+
+
+    public String getLastMessage() {
+        return lastMessage;
     }
 }

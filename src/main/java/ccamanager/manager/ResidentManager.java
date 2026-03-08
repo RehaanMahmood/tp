@@ -14,7 +14,6 @@ public class ResidentManager {
         residents = new ArrayList<>();
     }
 
-    // TODO: Implement adding (Aarav), deleting (Yi Yang) and giving CCA points (Smeet) to residents.
 
     /**
      * Return the list of all the residents

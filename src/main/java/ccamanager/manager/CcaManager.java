@@ -1,5 +1,6 @@
 package ccamanager.manager;
 
+import ccamanager.exceptions.CcaNotFoundException;
 import ccamanager.model.Cca;
 
 import java.util.ArrayList;
@@ -22,5 +23,21 @@ public class CcaManager {
      */
     public ArrayList<Cca> getCCAList() {
         return ccaList;
+    }
+
+    /**
+     * Delete a CCA from the CCA list
+     * @param ccaName Name of the CCA
+     * @throws CcaNotFoundException Exception if invalid CCA name is given
+     */
+    public void deleteCca(String ccaName) throws CcaNotFoundException {
+
+        for (int i = 0; i < ccaList.size(); i++) {
+            if (ccaList.get(i).getName().equals(ccaName)) {
+                ccaList.remove(i);
+                return;
+            }
+        }
+        throw new CcaNotFoundException("The CCA " + ccaName + " does not exist, please enter a valid CCA name.");
     }
 }

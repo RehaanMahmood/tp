@@ -2,6 +2,7 @@ package ccamanager.parser;
 
 import ccamanager.command.AddCcaCommand;
 import ccamanager.command.Command;
+import ccamanager.command.DeleteCcaCommand;
 import ccamanager.command.ExitCommand;
 import ccamanager.command.UnknownCommand;
 import ccamanager.command.ViewCcaCommand;
@@ -29,11 +30,13 @@ public class Parser {
 
         switch (commandWord) {
         case "add-cca":
-            String ccaName = parts[1].replace("n/", "");
-            return new AddCcaCommand(ccaName);
+            return new AddCcaCommand(getCcaName(input));
 
         case "view-cca":
             return new ViewCcaCommand();
+
+        case "delete-cca":
+            return new DeleteCcaCommand(getCcaName(input));
 
         case "bye":
             return new ExitCommand();
@@ -44,6 +47,14 @@ public class Parser {
         default:
             return new UnknownCommand();
         }
+    }
+
+    String getCcaName(String input) {
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            return "";
+        }
+        return parts[1];
     }
 
 }

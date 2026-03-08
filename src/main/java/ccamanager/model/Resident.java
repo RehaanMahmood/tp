@@ -9,8 +9,8 @@ package ccamanager.model;
 public class Resident {
 
     private String name;
-    private String ccaName;  // CCA this resident belongs to
-    private int points;      // participation points, defaults to 0
+    private String ccaName;
+    private int points;
 
     /**
      * @param name the resident's full name, e.g. "John Tan"

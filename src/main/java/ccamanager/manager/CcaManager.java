@@ -5,14 +5,22 @@ import ccamanager.model.Cca;
 import java.util.ArrayList;
 
 public class CcaManager {
-    private ArrayList<Cca> CCAList =  new ArrayList<>();
+    private ArrayList<Cca> ccaList =  new ArrayList<>();
 
+    /**
+     * Creates and adds the CCA to CCAList
+     * @param ccaName Name of the CCA
+     */
     public void addCCA(String ccaName) {
         Cca cca = new Cca(ccaName);
-        CCAList.add(cca);
+        ccaList.add(cca);
     }
 
+    /**
+     * Return the list of all the CCAs
+     * @return List of CCAs
+     */
     public ArrayList<Cca> getCCAList() {
-        return CCAList;
+        return ccaList;
     }
 }

@@ -53,7 +53,6 @@ public class Ui {
 
     /**
      * Displays an error message.
-     *
      * @param message the error to display
      */
     public void showError(String message) {
@@ -64,15 +63,13 @@ public class Ui {
 
     /**
      * Prints the full list of CCAs.
-     *
      * @param ccaList the list to display
      */
     public void showCcaList(ArrayList<Cca> ccaList) {
         System.out.println(DIVIDER);
         if (ccaList.isEmpty()) {
             showMessage("There are no CCAs currently. Please add CCAs using add-cca command");
-        }
-        else {
+        } else {
             System.out.println("Here is the complete list of all the CCAs :");
             for(int i = 1; i < ccaList.size() + 1; i++ ) {
                 Cca cca = ccaList.get(i-1);
@@ -83,7 +80,6 @@ public class Ui {
     }
     /**
      * Prints the full list of residents.
-     *
      * @param residentList the list to display
      */
     public void printResidentList(ArrayList<Resident> residentList) {

@@ -2,9 +2,11 @@ package ccamanager.command;
 
 import ccamanager.manager.CcaManager;
 import ccamanager.manager.ResidentManager;
-import ccamanager.model.Cca;
 import ccamanager.ui.Ui;
 
+/**
+ * Command to create and add a new CCA to the CCA manager
+ */
 public class AddCcaCommand extends Command {
     private String ccaName;
 

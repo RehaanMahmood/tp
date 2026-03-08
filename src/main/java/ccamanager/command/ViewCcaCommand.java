@@ -6,9 +6,10 @@ import ccamanager.manager.ResidentManager;
 import ccamanager.model.Cca;
 import ccamanager.ui.Ui;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
+/**
+ * Command to view the list of all the CCAs
+ */
 public class ViewCcaCommand extends Command {
 
     public ViewCcaCommand() {

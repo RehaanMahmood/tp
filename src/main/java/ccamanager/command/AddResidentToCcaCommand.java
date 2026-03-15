@@ -13,6 +13,7 @@ public class AddResidentToCcaCommand extends Command {
     private final int pointsScored;
 
     public AddResidentToCcaCommand(String matriculationNo, String ccaName, String pointsScored) {
+        assert Integer.parseInt(pointsScored) >= 0 : "Points scored must be greater than or equal to 0";
         this.matriculationNo = matriculationNo;
         this.ccaName = ccaName;
         this.pointsScored = Integer.parseInt(pointsScored);
@@ -21,6 +22,7 @@ public class AddResidentToCcaCommand extends Command {
     public void execute(CcaManager ccaManager, ResidentManager residentManager, Ui ui) {
 
         Cca cca = (Cca) ccaManager.getCCAList().stream().filter(x -> x.getName().equals(ccaName)).toArray()[0];
+
         Resident resident =
                 (Resident) residentManager.getResidentList().stream().filter(x -> x.getMatricNumber()
                         .equals(matriculationNo)).toArray()[0];

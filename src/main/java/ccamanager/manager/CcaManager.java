@@ -13,6 +13,7 @@ public class CcaManager {
      * @param ccaName Name of the CCA
      */
     public void addCCA(String ccaName) {
+        assert ccaList != null : "ccaList should be initialized";
         Cca cca = new Cca(ccaName);
         ccaList.add(cca);
     }
@@ -22,6 +23,7 @@ public class CcaManager {
      * @return List of CCAs
      */
     public ArrayList<Cca> getCCAList() {
+        assert ccaList != null : "ccaList should be initialized";
         return ccaList;
     }
 
@@ -31,7 +33,6 @@ public class CcaManager {
      * @throws CcaNotFoundException Exception if invalid CCA name is given
      */
     public void deleteCca(String ccaName) throws CcaNotFoundException {
-
         for (int i = 0; i < ccaList.size(); i++) {
             if (ccaList.get(i).getName().equals(ccaName)) {
                 ccaList.remove(i);

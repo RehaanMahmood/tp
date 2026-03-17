@@ -1,30 +1,33 @@
 package ccamanager.model;
 
+import java.util.ArrayList;
+
 /**
  * Represents a hall resident.
  * Plain data model — fields only, no business logic.
- * Fields: name (String), ccaName (String), points (int).
- * Add new fields here if needed (e.g. room number); logic goes in ResidentManager.
  */
 public class Resident {
 
     private String name;
-    private String ccaName;  // CCA this resident belongs to
-    private int points;      // participation points, defaults to 0
+    private String matricNumber;
+    private ArrayList<Cca> ccaRegisteredIn = new ArrayList<Cca>();
+    private ArrayList<Integer> points = new ArrayList<Integer>();
 
     /**
      * @param name the resident's full name, e.g. "John Tan"
      */
-    public Resident(String name) {
+    public Resident(String name,String matricNumber) {
+        assert name != null : "Resident name should not be null";
+        assert matricNumber != null : "Matric number should not be null";
         this.name = name;
-        this.ccaName = "";
-        this.points = 0;
+        this.matricNumber=matricNumber;
     }
 
     /**
      * @return the resident's name
      */
     public String getName() {
+        assert name != null : "Resident name should not be null";
         return name;
     }
 
@@ -36,38 +39,38 @@ public class Resident {
     }
 
     /**
-     * @return the CCA name this resident is assigned to
+     * Adds residents to the CCA they registered for, defaults to 0 points
+     * @param cca CCA to add residents in
      */
-    public String getCcaName() {
-        return ccaName;
+    public void addCcaToResident(Cca cca) {
+        ccaRegisteredIn.add(cca);
+        points.add(0);
     }
 
     /**
-     * @param ccaName name of the CCA to assign this resident to
+     * Adds residents to the CCA they registered for, with points
+     * @param cca CCA object the resident is registered with
+     * @param pointsEarned Number of points resident scored for the CCA
      */
-    public void setCcaName(String ccaName) {
-        this.ccaName = ccaName;
+    public void addCcaToResident(Cca cca, int pointsEarned) {
+        assert cca != null : "CCA should not be null";
+        assert pointsEarned >= 0 : "Points earned should be non-negative";
+        assert ccaRegisteredIn != null : "CCA list should be initialized";
+        assert points != null : "Points list should be initialized";
+
+        ccaRegisteredIn.add(cca);
+        points.add(pointsEarned);
     }
 
     /**
-     * @return participation points
+     * @return unique matric number of each student
      */
-    public int getPoints() {
-        return points;
+    public String getMatricNumber() {
+        return matricNumber;
     }
 
-    /**
-     * @param points points to assign; call via ResidentManager, not directly from commands
-     */
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    /**
-     * @return formatted string: "name | CCA: ccaName | Points: points"
-     */
     @Override
     public String toString() {
-        return name + " | CCA: " + ccaName + " | Points: " + points;
+        return name + " | " + matricNumber;
     }
 }

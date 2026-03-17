@@ -1,28 +1,19 @@
 package ccamanager.parser;
 
-import ccamanager.command.ExitCommand;
+import ccamanager.command.AddCcaCommand;
+import ccamanager.command.AddResidentCommand;
+import ccamanager.command.AddResidentToCcaCommand;
 import ccamanager.command.Command;
+import ccamanager.command.DeleteCcaCommand;
+import ccamanager.command.ExitCommand;
 import ccamanager.command.UnknownCommand;
+import ccamanager.command.ViewCcaCommand;
+import ccamanager.command.ViewResidentCommand;
 
 /**
  * Parser — reads raw user input and returns the appropriate Command object.
- * <p>
- * ====================================================
- * FOR TEAMMATES ADDING NEW COMMANDS:
- * ====================================================
- * When you create a new Command class, add a case here to return it.
- * <p>
- * Steps:
- * 1. Add a new "case" entry below for your command word (e.g. "add-cca")
- * 2. Parse any arguments from the input (e.g. extract the name after "n/")
- * 3. Return a new instance of your Command, passing arguments to the constructor
- * <p>
- * Rules:
- * - Parser ONLY creates Command objects — it never executes them
- * - Parser NEVER touches CcaManager, ResidentManager, or Ui
- * - If input is invalid, return new UnknownCommand() — don't throw here
- * ====================================================
- */
+ **/
+
 public class Parser {
 
     /**
@@ -36,42 +27,80 @@ public class Parser {
             return new UnknownCommand();
         }
 
-        String[] parts = input.split(" ", 2);
-        String commandWord = parts[0].toLowerCase();
-        String arguments = parts.length > 1 ? parts[1].trim() : "";
 
-        if (commandWord.equals("bye")) {
+
+        String[] parts = input.trim().split("\\s+");
+        String commandWord = parts[0].toLowerCase();
+
+        assert parts.length > 0 : "Non-blank input should produce at least one token";
+
+
+
+        switch (commandWord) {
+        case "add-cca":
+            if (parts.length < 2 || parts[1].isBlank()) {
+                return new UnknownCommand("Usage: add-cca <cca name>");
+            }
+            return new AddCcaCommand(getCcaName(input));
+
+        case "view-cca":
+            return new ViewCcaCommand();
+
+        case "delete-cca":
+            if (parts.length < 2 || parts[1].isBlank()) {
+                return new UnknownCommand("Usage: delete-cca <cca name>");
+            }
+
+            return new DeleteCcaCommand(getCcaName(input));
+
+        case "bye":
             return new ExitCommand();
 
-            // -------------------------------------------------------
-            // CCA commands — Veer adds cases here
-            // e.g. case "add-cca": return new AddCcaCommand(...)
-            // -------------------------------------------------------
+        case "view-resident":
+            return new ViewResidentCommand();
 
-            // -------------------------------------------------------
-            // Resident commands — Aarav / Yi Yang add cases here
-            // e.g. case "add-resident": return new AddResidentCommand(...)
-            // -------------------------------------------------------
+        case "add-resident":
+            if (parts.length < 3) {
+                return new UnknownCommand("Usage: add-resident <name> <matric number>");
+            }
+            if (parts[1].isBlank()) {
+                return new UnknownCommand("Resident name cannot be empty.");
+            }
+            if (parts[2].isBlank()) {
+                return new UnknownCommand("Matric number cannot be empty.");
+            }
+            return new AddResidentCommand(parts[1], parts[2]);
+
+        case "add-resident-to-cca":
+            if (parts.length < 4) {
+                return new UnknownCommand("Usage: add-resident-to-cca <matric number> <cca name> <points>");
+            }
+            if (parts[1].isBlank()) {
+                return new UnknownCommand("Matric number cannot be empty.");
+            }
+            if (parts[2].isBlank()) {
+                return new UnknownCommand("CCA name cannot be empty.");
+            }
+            if (parts[3].isBlank()) {
+                return new UnknownCommand("Points cannot be empty.");
+            }
+            return new AddResidentToCcaCommand(parts[1], parts[2], parts[3]);
+
+        default:
+            return new UnknownCommand();
         }
-        return new UnknownCommand();
     }
 
-    // ----------------------------------------------------------------
-    // Helper methods for parsing arguments
-    // ----------------------------------------------------------------
-
     /**
-     * Extracts the value after a prefix like "n/" from an argument string.
-     * Example: extractPrefix("n/Basketball", "n/") → "Basketball"
-     *
-     * @param arguments the argument string
-     * @param prefix    the prefix to strip (e.g. "n/")
-     * @return the value after the prefix, or empty string if not found
+     * Extracts out the name of the CCA from the command given
+     * @param input input text given by the user
+     * @return CCA name as a string
      */
-    public static String extractPrefix(String arguments, String prefix) {
-        if (arguments.contains(prefix)) {
-            return arguments.substring(arguments.indexOf(prefix) + prefix.length()).trim();
+    String getCcaName(String input) {
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            return "";
         }
-        return "";
+        return parts[1];
     }
 }

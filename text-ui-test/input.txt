@@ -3,3 +3,4 @@ add-resident Mark A1234567B
 view-resident
 add-resident John A7654321C Basketball 9
 view-resident
+bye

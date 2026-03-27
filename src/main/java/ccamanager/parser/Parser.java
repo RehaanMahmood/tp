@@ -99,6 +99,7 @@ public class Parser {
      * @return CCA name as a string
      */
     String getCcaName(String input) {
+        assert input != null && !input.isBlank() : "Input to getCcaName should not be null or blank";
         String[] parts = input.split(" ", 2);
         if (parts.length < 2) {
             return "";

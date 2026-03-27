@@ -7,10 +7,13 @@ public class Event {
     private final String eventDate;
 
     public Event(String eventName, Cca cca, String eventDate) {
+        assert eventName != null && !eventName.isBlank() : "Event name should not be null or blank";
+        assert cca != null : "CCA should not be null";
+        assert eventDate != null && !eventDate.isBlank() : "Event date should not be null or blank";
+
         this.eventName = eventName;
         this.cca = cca;
         this.eventDate = eventDate;
-
     }
 
     public String getEventName() {

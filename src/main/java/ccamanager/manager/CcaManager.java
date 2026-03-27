@@ -1,6 +1,8 @@
 package ccamanager.manager;
 
+import ccamanager.enumerations.CcaLevel;
 import ccamanager.exceptions.CcaNotFoundException;
+import ccamanager.exceptions.InvalidCcaLevelException;
 import ccamanager.model.Cca;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +21,11 @@ public class CcaManager {
      * Creates and adds the CCA to CCAList
      * @param ccaName Name of the CCA
      */
-    public void addCCA(String ccaName) throws DuplicateCcaException {
-        logger.log(Level.INFO,"Attempting to add CCA: " + ccaName);
+    public void addCCA(String ccaName, CcaLevel ccaLevel) throws DuplicateCcaException, InvalidCcaLevelException {
+        logger.log(Level.INFO,"Attempting to add CCA: " + ccaName + "(" + ccaLevel + ")");
 
         assert !ccaName.isBlank() : "CCA name should not be blank";
+        assert !ccaLevel.toString().isBlank() : "CCA level should not be blank";
         assert ccaList != null : "ccaList should be initialized";
 
         boolean isDuplicate = ccaList.stream()
@@ -31,8 +34,12 @@ public class CcaManager {
             logger.log(Level.WARNING,"Failed to add CCA (duplicate) :" + ccaName);
             throw new DuplicateCcaException("CCA " + ccaName + " already exists.");
         }
+        if(ccaLevel == CcaLevel.UNKNOWN){
+            throw new InvalidCcaLevelException("Could not add CCA: Invalid level provided.");
+        }
+
         int oldSize = ccaList.size();
-        ccaList.add(new Cca(ccaName));
+        ccaList.add(new Cca(ccaName, ccaLevel));
         assert ccaList.size() == oldSize + 1 : "CCA list size should increase by 1 after adding";
 
         logger.log(Level.INFO, "Successfully added CCA: {0}", ccaName);
@@ -61,7 +68,7 @@ public class CcaManager {
         assert !ccaName.isBlank() : "CCA name should not be blank";
 
         for (int i = 0; i < ccaList.size(); i++) {
-            if (ccaList.get(i).getName().equals(ccaName)) {
+            if (ccaList.get(i).getName().equalsIgnoreCase(ccaName)) {
                 int oldSize = ccaList.size();
                 ccaList.remove(i);
                 assert ccaList.size() == oldSize - 1 : "CCA list size should decrease by 1 after deletion";

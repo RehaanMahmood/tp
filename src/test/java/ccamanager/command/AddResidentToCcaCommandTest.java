@@ -1,5 +1,6 @@
 package ccamanager.command;
 
+import ccamanager.enumerations.CcaLevel;
 import ccamanager.manager.CcaManager;
 import ccamanager.manager.ResidentManager;
 import ccamanager.ui.Ui;
@@ -23,7 +24,7 @@ public class AddResidentToCcaCommandTest {
 
     @Test
     void execute_addResidentToCca_success() {
-        new AddCcaCommand("Basketball").execute(ccaManager, residentManager, ui);
+        new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, ui);
         new AddResidentCommand("John", "A1234567B").execute(ccaManager, residentManager, ui);
         new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, ui);
@@ -41,7 +42,7 @@ public class AddResidentToCcaCommandTest {
 
     @Test
     void execute_addResidentToCca_residentNotFound() {
-        new AddCcaCommand("Basketball").execute(ccaManager, residentManager, ui);
+        new AddCcaCommand("Basketball", CcaLevel.MEDIUM).execute(ccaManager, residentManager, ui);
         new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, ui);
         assertEquals("A1234567B not found.", ui.getLastMessage());
@@ -49,7 +50,7 @@ public class AddResidentToCcaCommandTest {
 
     @Test
     void execute_addResidentToCca_alreadyInCca() {
-        new AddCcaCommand("Basketball").execute(ccaManager, residentManager, ui);
+        new AddCcaCommand("Basketball", CcaLevel.LOW).execute(ccaManager, residentManager, ui);
         new AddResidentCommand("John", "A1234567B").execute(ccaManager, residentManager, ui);
         new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, ui);

@@ -92,6 +92,6 @@ public class Resident {
 
     @Override
     public String toString() {
-        return name + " (" + matricNumber + ")";
+        return name + " | " + matricNumber;
     }
 }

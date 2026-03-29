@@ -23,6 +23,11 @@ public class ResidentStatsCommand extends Command {
         ui.showResidentStats(totalPoints, mostActiveResident);
     }
 
+    /**
+     * Computes the total points across all CCAs for each resident
+     * @param residents a list of residents
+     * @return a hashmap containing the residents in <code>residents</code> and their corresponding total points
+     */
     private static HashMap<Resident, Integer> totalPoints(ArrayList<Resident> residents) {
         HashMap<Resident, Integer> totalPoints = new HashMap<>();
         for (Resident resident : residents) {
@@ -37,6 +42,11 @@ public class ResidentStatsCommand extends Command {
         return totalPoints;
     }
 
+    /**
+     * Finds the most active residents across all CCAs based on their total points
+     * @param totalPoints a hashmap containing the residents and their corresponding total points
+     * @return a list of the most active residents
+     */
     private static ArrayList<Resident> mostActiveResidents (HashMap<Resident, Integer> totalPoints) {
         ArrayList<Resident> mostActiveResidents = new ArrayList<>();
         int max = 0;

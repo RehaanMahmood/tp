@@ -70,6 +70,34 @@ Most active residents across all CCAs:
 _________________________________________________________________________________
 ```
 
+### Viewing all the available commands: `help`
+Displays a list of all available commands and their usage.
+
+Format: `help`
+
+Example:
+
+`> help`
+
+```
+_________________________________________________________________________________
+ Here is a list of all commands:
+> add-cca <cca name> <level (HIGH, MEDIUM, LOW or UNKNOWN)>
+> view-cca
+> delete-cca <cca name>
+> add-event <event name> <cca name> <data time>
+> add-resident <name> <matric number>
+> view-resident
+> add-resident-to-cca <matric number> <cca name> <points>
+> add-resident-to-event <matric number> <event name> <cca name>
+> view-points
+> cca-stats
+> resident-stats
+> help
+> bye
+_________________________________________________________________________________
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

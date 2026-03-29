@@ -1,6 +1,25 @@
 package ccamanager.parser;
 
-import ccamanager.command.*;
+import ccamanager.command.AddCcaCommand;
+import ccamanager.command.AddResidentCommand;
+import ccamanager.command.AddResidentToCcaCommand;
+import ccamanager.command.ExitCommand;
+import ccamanager.command.DeleteCcaCommand;
+import ccamanager.command.ViewCcaCommand;
+import ccamanager.command.ViewResidentCommand;
+import ccamanager.command.ViewMyEvents;
+import ccamanager.command.DeleteResidentCommand;
+import ccamanager.command.Command;
+import ccamanager.command.UnknownCommand;
+import ccamanager.command.AddEventCommand;
+import ccamanager.command.AddResidentToEventCommand;
+import ccamanager.command.ViewCcaEvents;
+import ccamanager.command.HelpCommand;
+import ccamanager.command.ViewPointsCommand;
+import ccamanager.command.CcaStatsCommand;
+import ccamanager.command.ResidentStatsCommand;
+
+
 
 import ccamanager.enumerations.CcaLevel;
 

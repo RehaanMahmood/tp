@@ -53,8 +53,9 @@ public class ResidentManager {
      */
     public Resident matchingResident(String matricNumber){
         for(Resident resident : residents){
-            if(resident.getMatricNumber().equalsIgnoreCase(matricNumber))
+            if(resident.getMatricNumber().equalsIgnoreCase(matricNumber)) {
                 return resident;
+            }
         }
         return null;
     }

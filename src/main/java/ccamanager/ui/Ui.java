@@ -4,12 +4,14 @@ import ccamanager.model.Cca;
 import ccamanager.model.Resident;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
 public class Ui {
 
-    private static final String DIVIDER = "____________________________________________________________";
+    private static final String DIVIDER = "_____________________________________________________________________" +
+            "____________";
     private final Scanner scanner;
     private String lastMessage;
 
@@ -108,7 +110,7 @@ public class Ui {
         if (residentList.isEmpty()) {
             showMessage("There are no residents currently. Please add residents using add-resident command");
         } else {
-            System.out.println("Here is the complete list of all the residents :");
+            System.out.println("Here are the points of each resident:");
             for(int i = 1; i < residentList.size() + 1; i++) {
                 Resident resident = residentList.get(i-1);
                 ArrayList<Cca> residentCcas= resident.getCcas();
@@ -122,6 +124,25 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    public void showCcaStats(HashMap<Cca, Double> avgPoints, ArrayList<Cca> mostPopularCcas, HashMap<Cca,
+            Resident> mostActiveResidents) {
+        System.out.println(DIVIDER);
+        System.out.println("Average points and most active resident per CCA:");
+        int index = 1;
+        for (Cca cca : avgPoints.keySet()) {
+            System.out.println(index + ". " + cca + ", average points: " + avgPoints.get(cca) + ", most active: " +
+                    mostActiveResidents.get(cca));
+            index++;
+        }
+        System.out.println();
+        System.out.println("Most popular CCAs:");
+        index = 1;
+        for (Cca cca : mostPopularCcas) {
+            System.out.println(index + ". " + cca + ", average points: " + avgPoints.get(cca));
+            index++;
+        }
+        System.out.println(DIVIDER);
+    }
 
     public String getLastMessage() {
         return lastMessage;

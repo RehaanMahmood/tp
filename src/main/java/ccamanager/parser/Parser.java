@@ -5,13 +5,15 @@ import ccamanager.command.AddEventCommand;
 import ccamanager.command.AddResidentCommand;
 import ccamanager.command.AddResidentToCcaCommand;
 import ccamanager.command.AddResidentToEventCommand;
-import ccamanager.command.ExitCommand;
+import ccamanager.command.CcaStatsCommand;
 import ccamanager.command.Command;
-import ccamanager.command.UnknownCommand;
 import ccamanager.command.DeleteCcaCommand;
+import ccamanager.command.ExitCommand;
+import ccamanager.command.UnknownCommand;
 import ccamanager.command.ViewCcaCommand;
-import ccamanager.command.ViewResidentCommand;
 import ccamanager.command.ViewPointsCommand;
+import ccamanager.command.ViewResidentCommand;
+
 import ccamanager.enumerations.CcaLevel;
 
 import java.util.logging.Level;
@@ -121,6 +123,8 @@ public class Parser {
             return new AddResidentToCcaCommand(parts[1], parts[2], parts[3]);
         case "view-points":
             return new ViewPointsCommand();
+        case "cca-stats":
+            return new CcaStatsCommand();
         default:
             return new UnknownCommand();
         }

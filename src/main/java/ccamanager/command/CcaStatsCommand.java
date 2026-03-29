@@ -17,9 +17,9 @@ public class CcaStatsCommand extends Command {
         ArrayList<Cca> ccas = ccaManager.getCCAList();
         try {
             HashMap<Cca, Double> avgPoints = avgPoints(ccas);
-            Cca mostPopularCca = mostPopularCca(avgPoints);
+            ArrayList<Cca> mostPopularCcas = mostPopularCcas(avgPoints);
             HashMap<Cca, Resident> mostActiveResidents = mostActiveResidents(ccas);
-            ui.showCcaStats(avgPoints, mostPopularCca, mostActiveResidents);
+            ui.showCcaStats(avgPoints, mostPopularCcas, mostActiveResidents);
         } catch (IllegalArgumentException e) {
             ui.showMessage("There are no CCAs currently. Please add CCAs using add-cca command");
         }
@@ -52,23 +52,27 @@ public class CcaStatsCommand extends Command {
     }
 
     /**
-     * Finds the most popular CCA based on their average points
+     * Finds the most popular CCAs based on their average points
      * @param avgPoints a hashmap of CCAs and their corresponding average points
-     * @return the most popular CCA
+     * @return a list containing the CCAs with the highest number of points
      */
-    private static Cca mostPopularCca(HashMap<Cca, Double> avgPoints) throws IllegalArgumentException {
+    private static ArrayList<Cca> mostPopularCcas(HashMap<Cca, Double> avgPoints) throws IllegalArgumentException {
         if  (avgPoints.isEmpty()) {
             throw  new IllegalArgumentException();
         }
-        Cca mostPopularCca = null;
+        double max = 0.0;
         for (Cca cca : avgPoints.keySet()) {
-            if (mostPopularCca == null) {
-                mostPopularCca = cca;
-            } else if (avgPoints.get(cca) > avgPoints.get(mostPopularCca)) {
-                mostPopularCca = cca;
+            if (avgPoints.get(cca) > max) {
+                max = avgPoints.get(cca);
             }
         }
-        return mostPopularCca;
+        ArrayList<Cca> mostPopularCcas = new ArrayList<>();
+        for (Cca cca : avgPoints.keySet()) {
+            if (avgPoints.get(cca) == max) {
+                mostPopularCcas.add(cca);
+            }
+        }
+        return mostPopularCcas;
     }
 
     /**

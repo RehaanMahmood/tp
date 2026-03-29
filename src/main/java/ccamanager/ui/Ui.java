@@ -124,7 +124,7 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void showCcaStats(HashMap<Cca, Double> avgPoints, Cca mostPopularCca, HashMap<Cca,
+    public void showCcaStats(HashMap<Cca, Double> avgPoints, ArrayList<Cca> mostPopularCcas, HashMap<Cca,
             Resident> mostActiveResidents) {
         System.out.println(DIVIDER);
         System.out.println("Average points and most active resident per CCA:");
@@ -135,8 +135,12 @@ public class Ui {
             index++;
         }
         System.out.println();
-        System.out.println("Most popular CCA: " + mostPopularCca + ", average points: " +
-                avgPoints.get(mostPopularCca));
+        System.out.println("Most popular CCAs:");
+        index = 1;
+        for (Cca cca : mostPopularCcas) {
+            System.out.println(index + ". " + cca + ", average points: " + avgPoints.get(cca));
+            index++;
+        }
         System.out.println(DIVIDER);
     }
 

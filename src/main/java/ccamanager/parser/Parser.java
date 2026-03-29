@@ -76,7 +76,11 @@ public class Parser {
                 return new UnknownCommand("Matric number cannot be empty.");
             }
             return new AddResidentCommand(parts[1], parts[2]);
-
+        case "delete-resident":
+            if (parts[1].isBlank()) {
+                return new UnknownCommand("Resident name cannot be empty.");
+            }
+            return new DeleteResidentCommand(parts[1]);
         case "add-resident-to-event":
             if (parts.length < 4) {
                 return new UnknownCommand("Usage: add-resident-to-event <matric number> <event name> <cca name>");
@@ -116,8 +120,14 @@ public class Parser {
         case "resident-stats":
             return new ResidentStatsCommand();
         case "view-cca-event":
+            if (parts[1].isBlank()) {
+                return new UnknownCommand("Resident name cannot be empty.");
+            }
             return new ViewCcaEvents(parts[1]);
         case "view-my-event":
+            if (parts[1].isBlank()) {
+                return new UnknownCommand("Resident name cannot be empty.");
+            }
             return new ViewMyEvents(parts[1]);
         case "help":
             return new HelpCommand();

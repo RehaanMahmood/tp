@@ -1,5 +1,7 @@
 package ccamanager.manager;
 
+import ccamanager.exceptions.CcaNotFoundException;
+import ccamanager.exceptions.ResidentNotFoundException;
 import ccamanager.model.Resident;
 
 import ccamanager.exceptions.DuplicateResidentException;
@@ -55,5 +57,38 @@ public class ResidentManager {
                 return resident;
         }
         return null;
+    }
+
+    public String nameGivenMatricNumber(String matricNumber){
+        Resident resident= this.matchingResident(matricNumber);
+        return resident.getName();
+    }
+
+    /**
+     * Delete a resident
+     * @param matricNumber Name of the CCA
+     * @throws ResidentNotFoundException Exception if invalid CCA name is given
+     */
+    public void deleteResident(String matricNumber) throws ResidentNotFoundException {
+
+        String residentName = this.nameGivenMatricNumber(matricNumber);
+        logger.log(Level.INFO,"Attempted to delete resident: {0}", residentName);
+
+        assert residents != null : "ccaList should be initialized";
+        assert residentName != null : "CCA name should not be null";
+        assert !residentName.isBlank() : "CCA name should not be blank";
+
+        for (int i = 0; i < residents.size(); i++) {
+            if (residents.get(i).getMatricNumber().equalsIgnoreCase(matricNumber)) {
+                int oldSize = residents.size();
+                residents.remove(i);
+                assert residents.size() == oldSize - 1 : "CCA list size should decrease by 1 after deletion";
+
+                logger.log(Level.INFO, "Successfully deleted resident: {0}", residentName);
+                return;
+            }
+        }
+        logger.log(Level.WARNING, "Failed to delete resident: {0}. (Not an exisitng resident).", residentName);
+        throw new ResidentNotFoundException("The resident " + residentName + " does not exist, please enter a valid CCA name.");
     }
 }

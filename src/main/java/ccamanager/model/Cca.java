@@ -23,6 +23,7 @@ public class Cca {
     private String name;
     private CcaLevel level;
     private ArrayList<Resident> registeredResidents = new ArrayList<Resident>();
+    private ArrayList<Resident> excoMembers = new ArrayList<Resident>();
 
 
     /**
@@ -93,6 +94,24 @@ public class Cca {
         }
         registeredResidents.add(resident);
         logger.log(Level.INFO, "Resident " + resident.getMatricNumber() + " added successfully to the CCA " + name);
+    }
+
+    public void addExcoToCca(Resident resident) throws ResidentAlreadyInCcaException {
+
+        logger.log(Level.INFO, "Attempted to add " + resident.getMatricNumber() + " as an EXCO to " + name );
+
+        assert registeredResidents != null : "Registered residents list should be initialized";
+        assert resident != null : "Resident should not be null";
+
+        boolean alreadyInExco = excoMembers.stream()
+                .anyMatch(x -> x.getMatricNumber().equals(resident.getMatricNumber()));
+        if (alreadyInExco) {
+            logger.log(Level.WARNING, "EXCO member " + resident.getMatricNumber() + " already exists as an EXCO in CCA " + name );
+            throw new ResidentAlreadyInCcaException("Resident " + resident.getName()
+                    + " is already a EXCO of " + this.name + ".");
+        }
+        excoMembers.add(resident);
+        logger.log(Level.INFO, "Resident " + resident.getMatricNumber() + " added successfully as an EXCO of the CCA " + name);
     }
 
     /**

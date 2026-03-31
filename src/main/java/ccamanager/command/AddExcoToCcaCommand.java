@@ -41,10 +41,10 @@ public class AddExcoToCcaCommand extends Command {
                     .orElseThrow(() -> new ResidentNotFoundException(matriculationNo + " not found."));
 
             cca.addExcoToCca(resident);
-            resident.addCcaToResident(cca, pointsScored);
+            resident.addCcaToResident(cca);
 
-            ui.showMessage("Resident " + resident + " was added to CCA: " + cca.getName() +
-                    " with " + pointsScored + " points.");
+            ui.showMessage("Resident " + resident + " was added as an EXCO to CCA: " + cca.getName()
+                    );
 
         } catch (CcaNotFoundException | ResidentNotFoundException | ResidentAlreadyInCcaException e) {
             ui.showError(e.getMessage());

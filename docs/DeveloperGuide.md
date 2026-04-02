@@ -120,7 +120,7 @@ The diagram above shows the six layers and their relationships. The table below 
 The `add-cca` command adds a new CCA to the system.
 
 Format:
-`add-cca <cca name> <level>`
+`add-cca <cca name>; <level>`
 
 ---
 
@@ -249,7 +249,7 @@ public void execute(CcaManager ccaManager, ResidentManager residentManager, Ui u
 The `add-exco-to-cca` command adds an existing resident as an EXCO for the Cca.
 
 Format:
-`add-exco-to-cca <matric number> <cca name>`
+`add-exco-to-cca <matric number>; <cca name>`
 
 ---
 
@@ -377,7 +377,7 @@ public void execute(CcaManager ccaManager, ResidentManager residentManager, Even
 The `add-resident` command adds a new resident to the system.
 
 Format:  
-`add-resident <resident name> <matric number>`
+`add-resident <resident name>; <matric number>`
 
 ---
 
@@ -493,7 +493,7 @@ ui.showMessage(e.getMessage());
 The `add-resident-to-cca` command adds an existing resident to a CCA.
 
 Format:
-`add-resident-to-cca <matric number> <cca name> <points>`
+`add-resident-to-cca <matric number>; <cca name> <points>`
 
 ---
 
@@ -590,7 +590,7 @@ Format:
 - The `Parser` creates a `ResidentStatsCommand` object.
 - `ResidentStatsCommand.totalPoints()` computes the total points for each resident.
 - `ResdientStatsCommand.mostActiveResidents()` finds the most active residents across all CCAs based on their total points.
-- If there are no resdients in the first place, `ResidentStatsCommand.execute()`passes a message to the user through `Ui.showMessage()`. Otherwise, it passes the above information to `Ui.showResidentStats()` for display.
+- If there are no residents in the first place, `ResidentStatsCommand.execute()`passes a message to the user through `Ui.showMessage()`. Otherwise, it passes the above information to `Ui.showResidentStats()` for display.
 
 ```java
 @Override
@@ -620,7 +620,7 @@ public void execute(CcaManager ccaManager, ResidentManager residentManager, Even
 The `add-event` command adds a new event under a specified CCA.
 
 Format:
-`add-event <event name> <cca name> <date/time>`
+`add-event <event name>; <cca name>; <date/time>`
 
 ---
 
@@ -664,7 +664,7 @@ public void execute(CcaManager ccaManager, ResidentManager residentManager, Even
 The `add-resident-to-event` command adds an existing resident to a specific event under a CCA.
 
 Format:
-`add-resident-to-event <matric number> <event name> <cca name>`
+`add-resident-to-event <matric number>; <event name>; <cca name>`
 
 ---
 
@@ -912,8 +912,8 @@ It complements the User Guide and focuses on key test flows.
 #### 1. Add CCAs
 
 ```
-add-cca Basketball HIGH
-add-cca Dance LOW
+add-cca Basketball; HIGH
+add-cca Dance; LOW
 ```
 
 ---
@@ -929,8 +929,8 @@ view-cca
 #### 3. Add Residents
 
 ```
-add-resident John A1234567B
-add-resident James A7654321C
+add-resident Ramesh; A1234567B
+add-resident Suresh; A7654321C
 ```
 
 ---
@@ -946,8 +946,8 @@ view-resident
 #### 5. Add Events
 
 ```
-add-event Practice-Week1 Basketball 29/3/26
-add-event Orientation Dance 2/4/26
+add-event Practice-Week1; Basketball; 29/3/26
+add-event Orientation; Dance; 2/4/26
 ```
 
 ---
@@ -955,8 +955,8 @@ add-event Orientation Dance 2/4/26
 #### 6. Add Residents to Events
 
 ```
-add-resident-to-event A1234567B Practice-Week1 Basketball
-add-resident-to-event A7654321C Orientation Dance
+add-resident-to-event A1234567B; Practice-Week1; Basketball
+add-resident-to-event A7654321C; Orientation Dance
 ```
 
 ---
@@ -973,13 +973,22 @@ view-my-event A1234567B
 #### 8. Assign EXCO
 
 ```
-add-exco-to-cca A1234567B Basketball
+add-exco-to-cca A1234567B; Basketball
 view-exco Basketball
 ```
 
 ---
 
 #### 9. View Points and Statistics
+
+---
+
+#### 10. Delete Operations
+
+```
+delete-resident A1234567B
+delete-cca Basketball
+```
 
 ---
 
@@ -1376,14 +1385,7 @@ resident-stats
 
 ---
 
-#### 10. Delete Operations
 
-```
-delete-resident A1234567B
-delete-cca Basketball
-```
-
----
 
 ### Edge Cases to Try
 

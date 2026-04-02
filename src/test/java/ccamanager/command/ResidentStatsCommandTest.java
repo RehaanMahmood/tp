@@ -49,8 +49,8 @@ public class ResidentStatsCommandTest {
         assert residents.size() == 2 : "There should be 2 residents.";
         assert ccaManager.getCCAList().size() == 2 : "There should be 2 CCAs.";
         HashMap<Resident, Integer> expectedTotalPoints = new HashMap<>();
-        expectedTotalPoints.put(new Resident("John", "1234"), 9);
         expectedTotalPoints.put(new Resident("James", "4321"), 17);
+        expectedTotalPoints.put(new Resident("John", "1234"), 9);
         assertEquals(expectedTotalPoints, ResidentStatsCommand.totalPoints(residents));
     }
 

@@ -29,6 +29,7 @@ public class CcaStatsCommand extends Command {
      * Computes the average number of points for each CCA in <code>ccas</code>
      * @param ccas the list of CCAs
      * @return a hashmap of CCAs and their corresponding average points
+     * @throws IllegalArgumentException if <code>ccas</code> is empty
      */
     public static HashMap<Cca, Double> avgPoints(ArrayList<Cca> ccas) throws IllegalArgumentException {
         if (ccas.isEmpty()) {
@@ -55,6 +56,7 @@ public class CcaStatsCommand extends Command {
      * Finds the most popular CCAs based on their average points
      * @param avgPoints a hashmap of CCAs and their corresponding average points
      * @return a list containing the CCAs with the highest number of points
+     * @throws IllegalArgumentException if <code>avgPoints</code> is empty
      */
     public static ArrayList<Cca> mostPopularCcas(HashMap<Cca, Double> avgPoints) throws IllegalArgumentException {
         if  (avgPoints.isEmpty()) {
@@ -79,6 +81,7 @@ public class CcaStatsCommand extends Command {
      * Finds the resident with the most points for each CCA
      * @param ccas the list of CCAs
      * @return a hashmap containing the CCAs and their most active member
+     * @throws IllegalArgumentException if <code>ccas</code> is empty
      */
     public static HashMap<Cca, Resident> mostActiveResidents(ArrayList<Cca> ccas) throws IllegalArgumentException {
         if (ccas.isEmpty()) {

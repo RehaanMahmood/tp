@@ -66,4 +66,39 @@ public class CcaStatsCommandTest {
         }
         assertTrue(caughtException);
     }
+
+    @Test
+    void mostPopularCcas_success() {
+        Command addCcaBasketball = parser.parse("add-cca Basketball HIGH");
+        addCcaBasketball.execute(ccaManager, residentManager, eventManager, ui);
+        Command addCcaFootball = parser.parse("add-cca Football MEDIUM");
+        addCcaFootball.execute(ccaManager, residentManager, eventManager, ui);
+        Command addCcaTennis = parser.parse("add-cca Tennis LOW");
+        addCcaTennis.execute(ccaManager, residentManager, eventManager, ui);
+        Command addResidentJohn = parser.parse("add-resident John 1234");
+        addResidentJohn.execute(ccaManager, residentManager, eventManager, ui);
+        Command addResidentJames = parser.parse("add-resident James 4321");
+        addResidentJames.execute(ccaManager, residentManager, eventManager, ui);
+        Command addResidentJane = parser.parse("add-resident Jane 5678");
+        addResidentJane.execute(ccaManager, residentManager, eventManager, ui);
+        Command addJohnToBasketball = parser.parse("add-resident-to-cca 1234 Basketball 9");
+        addJohnToBasketball.execute(ccaManager, residentManager, eventManager, ui);
+        Command addJamesToFootball = parser.parse("add-resident-to-cca 4321 Football 9");
+        addJamesToFootball.execute(ccaManager, residentManager, eventManager, ui);
+        Command addJaneToTennis = parser.parse("add-resident-to-cca 5678 Tennis 8");
+        addJaneToTennis.execute(ccaManager, residentManager, eventManager, ui);
+        ArrayList<Cca> ccas = ccaManager.getCCAList();
+        assert ccas.size() == 3;
+        assert residentManager.getResidentList().size() == 3;
+        HashMap<Cca, Double> avgPoints = CcaStatsCommand.avgPoints(ccas);
+        ArrayList<Cca> expectedMostPopularCcas = new ArrayList<>();
+        expectedMostPopularCcas.add(new Cca("Basketball", HIGH));
+        expectedMostPopularCcas.add(new Cca("Football", MEDIUM));
+        assertEquals(expectedMostPopularCcas, CcaStatsCommand.mostPopularCcas(avgPoints));
+    }
+
+    @Test
+    void mostPopularCcas_noCcas_failure() {
+        avgPoints_noCcas_failure(); // mostPopularCcas() calls averagePoints() anyway
+    }
 }

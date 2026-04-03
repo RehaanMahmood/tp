@@ -1,5 +1,6 @@
 package ccamanager.command;
 
+import ccamanager.exceptions.ResidentAlreadyInExcoException;
 import ccamanager.manager.CcaManager;
 import ccamanager.manager.EventManager;
 import ccamanager.manager.ResidentManager;
@@ -13,7 +14,13 @@ import ccamanager.exceptions.CcaNotFoundException;
 import ccamanager.exceptions.ResidentNotFoundException;
 import ccamanager.exceptions.ResidentAlreadyInCcaException;
 
-
+/**
+ * Command to promote an existing resident to an Executive Committee (EXCO)
+ * position within a specific CCA.
+ * * <p>The command identifies the CCA and Resident by their unique names and
+ * matriculation numbers respectively, then updates both objects to reflect the
+ * new relationship.</p>
+ */
 public class AddExcoToCcaCommand extends Command {
 
     private final String matriculationNo;
@@ -46,7 +53,8 @@ public class AddExcoToCcaCommand extends Command {
 
             ui.showMessage("Resident " + resident + " was added as an EXCO to CCA: " + cca.getName());
 
-        } catch (CcaNotFoundException | ResidentNotFoundException | ResidentAlreadyInCcaException e) {
+        } catch (CcaNotFoundException | ResidentNotFoundException |
+                 ResidentAlreadyInCcaException | ResidentAlreadyInExcoException e) {
             ui.showError(e.getMessage());
         }
     }

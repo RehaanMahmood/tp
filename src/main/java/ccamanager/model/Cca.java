@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ccamanager.enumerations.CcaLevel;
+import ccamanager.exceptions.ResidentAlreadyInExcoException;
 
 /**
  * Represents a Co-Curricular Activity (CCA).
@@ -106,7 +107,7 @@ public class Cca {
                 + " added successfully to the CCA " + name);
     }
 
-    public void addExcoToCca(Resident resident) throws ResidentAlreadyInCcaException {
+    public void addExcoToCca(Resident resident) throws ResidentAlreadyInExcoException, ResidentAlreadyInCcaException {
 
         logger.log(Level.INFO, "Attempted to add " + resident.getMatricNumber()
                 + " as an EXCO to " + name );
@@ -120,13 +121,14 @@ public class Cca {
         if (alreadyInExco) {
             logger.log(Level.WARNING, "EXCO member " + resident.getMatricNumber()
                     + " already exists as an EXCO in CCA " + name );
-            throw new ResidentAlreadyInCcaException("Resident " + resident.getName()
+            throw new ResidentAlreadyInExcoException("Resident " + resident.getName()
                     + " is already a EXCO of " + this.name + ".");
         }
         excoMembers.add(resident);
 
         boolean alreadyIn = registeredResidents.stream()
-                .anyMatch(x -> x.getMatricNumber().equals(resident.getMatricNumber()));
+                .anyMatch(x -> x.getMatricNumber()
+                        .equals(resident.getMatricNumber()));
         if (!alreadyIn) {
             this.addResidentToCca(resident);
         }

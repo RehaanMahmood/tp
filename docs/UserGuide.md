@@ -78,14 +78,14 @@ Follow the steps below to set up and run the application:
 
 Add a new CCA with its priority
 
-Format: `add-resident <Resident Name> <Student Number>`
+Format: `add-resident <Resident Name>; <Student Number>`
 
 Example :
 
 ```
-> add-cca Basketball HIGH
+> add-cca Basketball; HIGH
 _________________________________________________________________________________
- CCA added: Basketball(HIGH)
+ CCA added: Basketball (HIGH)
 _________________________________________________________________________________
 ```
 
@@ -103,9 +103,9 @@ Example :
 > view-cca
 _________________________________________________________________________________
 Here is the complete list of all the CCAs :
-1. Basketball(HIGH): 0 residents
-2. ComputingClub(MEDIUM): 0 residents
-3. Dance(LOW): 0 residents
+1. Basketball (HIGH): 0 residents
+2. ComputingClub (MEDIUM): 0 residents
+3. Dance (LOW): 0 residents
 _________________________________________________________________________________
 ```
 
@@ -144,6 +144,21 @@ Here are the events under Basketball:
 2. Friendly-Match | 5/4/26
 _________________________________________________________________________________
 ```
+---
+
+### Adding Resident to a CCA: `add-resident-to-cca`
+
+Add an existing resident to a CCA and assign their points for participation.
+
+Format: `add-resident-to-cca <matric number> <cca name> <points>`
+
+Example:
+```
+> add-resident-to-cca A1234567B Basketball 10
+_________________________________________________________________________________
+ Resident John | A1234567B was added to CCA: Basketball with 10 points.
+_________________________________________________________________________________
+```
 
 ---
 
@@ -153,7 +168,7 @@ ________________________________________________________________________________
 
 Adding an event to any CCA
 
-Format: `add-event <event name> <cca name> <date>`
+Format: `add-event <event name>; <cca name>; <date>`
 
 Example :
 
@@ -170,14 +185,31 @@ ________________________________________________________________________________
 
 Residents who take part or attend an event need to be added to the event
 
-Format: `add-resident-to-event <matric number> <event namee> <cca name>`
+Format: `add-resident-to-event <matric number>; <event namee>; <cca name>`
 
 Example :
 
 ```
-> add-resident-to-event A123 Practice-Week1 Dance
+> add-resident-to-event A123; Practice-Week1; Dance
 _________________________________________________________________________________
  Successfully added Veer to event Practice-Week1 under CCA Dance.
+_________________________________________________________________________________
+```
+
+---
+
+
+### Adding Resident to a CCA: `add-resident-to-cca`
+
+Add an existing resident to a CCA and assign their points for participation.
+
+Format: `add-resident-to-cca <matric number>; <cca name>; <points>`
+
+Example:
+```
+> add-resident-to-cca A1234567B; Basketball; 10
+_________________________________________________________________________________
+ Resident John | A1234567B was added to CCA: Basketball with 10 points.
 _________________________________________________________________________________
 ```
 
@@ -208,14 +240,14 @@ ________________________________________________________________________________
 
 Add a new resident into the system.
 
-Format: `add-resident <resident name> <matric number>`
+Format: `add-resident <resident name>; <matric number>`
 
 Example:
 
 ```
-> add-resident yy A1234567B
+> add-resident Ramesh A1234567B
 _________________________________________________________________________________
-Resident added: John A1234567B
+Resident added: Ramesh A1234567B
 _________________________________________________________________________________
 ```
 
@@ -301,7 +333,7 @@ ________________________________________________________________________________
 
 Assigns a resident as an Executive Committee member for a specific CCA.
 
-Format: `add-exco-to-cca <matric number> <cca name>`
+Format: `add-exco-to-cca <matric number>; <cca name>`
 
 Example:
 
@@ -403,22 +435,22 @@ ________________________________________________________________________________
 # Command Summary
 
 ```
-add-cca <cca name> <level>
+add-cca <cca name>; <level>
 view-cca
 delete-cca <cca name>
 
-add-event <event name> <cca name> <date>
+add-event <event name>; <cca name>; <date>
 view-cca-event <cca name>
-add-resident-to-event <matric number> <event name> <cca name>
+add-resident-to-event <matric number>; <event name>; <cca name>
 view-my-event <matric number>
 
-add-resident <name> <matric number>
+add-resident <name>; <matric number>
 view-resident
 delete-resident <matric number>
 view-points
 
 view-exco <cca name>
-add-exco-to-cca <matric number> <cca name>
+add-exco-to-cca <matric number>; <cca name>
 
 cca-stats
 resident-stats

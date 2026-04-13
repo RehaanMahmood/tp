@@ -35,7 +35,8 @@ public class AddResidentToCcaCommandTest {
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
 
-        assertDoesNotThrow(() -> new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
+        assertDoesNotThrow(() ->
+                new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, eventManager, ui));
 
         // Using .contains() prevents failures from minor UI formatting differences
@@ -50,7 +51,8 @@ public class AddResidentToCcaCommandTest {
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
 
-        assertDoesNotThrow(() -> new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
+        assertDoesNotThrow(() ->
+                new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, eventManager, ui));
 
         assertTrue(ui.getLastMessage().contains("Basketball not found"),
@@ -62,7 +64,8 @@ public class AddResidentToCcaCommandTest {
         new AddCcaCommand("Basketball", CcaLevel.MEDIUM)
                 .execute(ccaManager, residentManager, eventManager, ui);
 
-        assertDoesNotThrow(() -> new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
+        assertDoesNotThrow(() ->
+                new AddResidentToCcaCommand("A1234567B", "Basketball", "10")
                 .execute(ccaManager, residentManager, eventManager, ui));
 
         assertTrue(ui.getLastMessage().contains("A1234567B not found"),
@@ -105,6 +108,7 @@ public class AddResidentToCcaCommandTest {
 
     @Test
     void constructor_zeroPoints_success() {
-        assertDoesNotThrow(() -> new AddResidentToCcaCommand("A1234567B", "Basketball", "0"));
+        assertDoesNotThrow(() ->
+                new AddResidentToCcaCommand("A1234567B", "Basketball", "0"));
     }
 }

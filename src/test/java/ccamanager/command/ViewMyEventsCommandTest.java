@@ -55,16 +55,23 @@ public class ViewMyEventsCommandTest {
     void execute_viewMyEvents_oneMatchingEvent() {
         // Setup
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
-        new AddResidentCommand("John Doe", "A1234567X").execute(ccaManager, residentManager, eventManager, ui);
-        new AddEventCommand("Training", "Basketball", "2026-04-03").execute(ccaManager, residentManager, eventManager, ui);
-        new AddResidentToEventCommand("A1234567X", "Training", "Basketball").execute(ccaManager, residentManager, eventManager, ui);
+        new AddResidentCommand("John Doe", "A1234567X")
+                .execute(ccaManager, residentManager, eventManager, ui);
+
+        // ---> NEW FIX: Add John to the CCA first! <---
+        new AddResidentToCcaCommand("A1234567X", "Basketball", "0")
+                .execute(ccaManager, residentManager, eventManager, ui);
+
+        new AddEventCommand("Training", "Basketball", "2026-04-03")
+                .execute(ccaManager, residentManager, eventManager, ui);
+        new AddResidentToEventCommand("A1234567X", "Training", "Basketball")
+                .execute(ccaManager, residentManager, eventManager, ui);
 
         assertDoesNotThrow(() -> new ViewMyEventsCommand("A1234567X")
                 .execute(ccaManager, residentManager, eventManager, ui));
 
         String output = ui.getLastMessage();
 
-        // I added the "Actual output: " string so if it fails, you can see EXACTLY why!
         assertTrue(output.contains("Training"), "Output should contain the event name. Actual output: [" + output + "]");
         assertTrue(output.contains("2026-04-03"), "Output should contain the date. Actual output: [" + output + "]");
     }
@@ -73,21 +80,33 @@ public class ViewMyEventsCommandTest {
     void execute_viewMyEvents_multipleMatchingEvents() {
         // Setup
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
-        new AddResidentCommand("John Doe", "A1234567X").execute(ccaManager, residentManager, eventManager, ui);
+        new AddResidentCommand("John Doe", "A1234567X")
+                .execute(ccaManager, residentManager, eventManager, ui);
 
-        new AddEventCommand("Training", "Basketball", "2026-04-03").execute(ccaManager, residentManager, eventManager, ui);
-        new AddEventCommand("Game", "Basketball", "2026-04-04").execute(ccaManager, residentManager, eventManager, ui);
+        // ---> NEW FIX: Add John to the CCA first! <---
+        new AddResidentToCcaCommand("A1234567X", "Basketball", "0")
+                .execute(ccaManager, residentManager, eventManager, ui);
 
-        new AddResidentToEventCommand("A1234567X", "Training", "Basketball").execute(ccaManager, residentManager, eventManager, ui);
-        new AddResidentToEventCommand("A1234567X", "Game", "Basketball").execute(ccaManager, residentManager, eventManager, ui);
+        new AddEventCommand("Training", "Basketball", "2026-04-03")
+                .execute(ccaManager, residentManager, eventManager, ui);
+        new AddEventCommand("Game", "Basketball", "2026-04-04")
+                .execute(ccaManager, residentManager, eventManager, ui);
+
+        new AddResidentToEventCommand("A1234567X", "Training", "Basketball")
+                .execute(ccaManager, residentManager, eventManager, ui);
+        new AddResidentToEventCommand("A1234567X", "Game", "Basketball")
+                .execute(ccaManager, residentManager, eventManager, ui);
 
         assertDoesNotThrow(() -> new ViewMyEventsCommand("A1234567X")
                 .execute(ccaManager, residentManager, eventManager, ui));
 
         String output = ui.getLastMessage();
 
-        // I added the "Actual output: " string here too
-        assertTrue(output.contains("Training"), "Output should contain the first event 'Training'. Actual: [" + output + "]");
-        assertTrue(output.contains("Game"), "Output should contain the second event 'Game'. Actual: [" + output + "]");
+        assertTrue(
+                output.contains("Training"),
+                "Output should contain the first event 'Training'. Actual: [" + output + "]");
+        assertTrue(
+                output.contains("Game"),
+                "Output should contain the second event 'Game'. Actual: [" + output + "]");
     }
 }

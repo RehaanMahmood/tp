@@ -150,7 +150,7 @@ ________________________________________________________________________________
 
 Add an existing resident to a CCA and assign their points for participation.
 
-Format: `add-resident-to-cca <unique identifier> <cca name> <points>`
+Format: `add-resident-to-cca <unique identifier>; <cca name>; <points>`
 
 Example:
 ```

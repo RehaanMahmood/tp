@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 
 public class EventManager {
 
-    private static ArrayList<Event> events;
     private static final Logger logger = Logger.getLogger(EventManager.class.getName());
+    private final ArrayList<Event> events;
 
 
     public EventManager() {

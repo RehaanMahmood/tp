@@ -63,6 +63,17 @@ public class Resident {
         points.add(pointsEarned);
     }
 
+    public void updatePoint(Cca cca,int point){
+        assert cca != null : "CCA should not be null";
+        assert point >= 0 : "Points earned should be non-negative";
+        String targetedCca = cca.getName();
+        for(int i =0;i<ccaRegisteredIn.size();i++){
+            if(ccaRegisteredIn.get(i).getName().equalsIgnoreCase(targetedCca)){
+                points.set(i,point);
+                return;
+            }
+        }
+    }
     /**
      * @return unique matric number of each student
      */

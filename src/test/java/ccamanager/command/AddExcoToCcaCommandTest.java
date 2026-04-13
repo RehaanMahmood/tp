@@ -29,7 +29,7 @@ public class AddExcoToCcaCommandTest {
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
-        new AddExcoToCcaCommand("A1234567B", "Basketball")
+        new AddExcoToCcaCommand("A1234567B", "Basketball","3")
                 .execute(ccaManager, residentManager, eventManager, ui);
         assertEquals("Resident John | A1234567B was added as an EXCO to CCA: Basketball",
                 ui.getLastMessage());
@@ -40,7 +40,7 @@ public class AddExcoToCcaCommandTest {
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
-        new AddExcoToCcaCommand("A1234568B", "Football")
+        new AddExcoToCcaCommand("A1234568B", "Football","4")
                 .execute(ccaManager, residentManager, eventManager, ui);
         assertEquals("Football not found.", ui.getLastMessage());
     }
@@ -50,7 +50,7 @@ public class AddExcoToCcaCommandTest {
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
-        new AddExcoToCcaCommand("A1234568A", "Basketball")
+        new AddExcoToCcaCommand("A1234568A", "Basketball","10")
                 .execute(ccaManager, residentManager, eventManager, ui);
         assertEquals("A1234568A not found.", ui.getLastMessage());
     }
@@ -60,9 +60,9 @@ public class AddExcoToCcaCommandTest {
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
         new AddResidentCommand("John", "A1234567B")
                 .execute(ccaManager, residentManager, eventManager, ui);
-        new AddExcoToCcaCommand("A1234567B", "Basketball")
+        new AddExcoToCcaCommand("A1234567B", "Basketball","3")
                 .execute(ccaManager, residentManager, eventManager, ui);
-        new AddExcoToCcaCommand("A1234567B", "Basketball")
+        new AddExcoToCcaCommand("A1234567B", "Basketball","4")
                 .execute(ccaManager, residentManager, eventManager, ui);
         assertEquals("Resident John is already a EXCO of Basketball.", ui.getLastMessage());
     }

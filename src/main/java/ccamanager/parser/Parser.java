@@ -22,6 +22,7 @@ import ccamanager.command.ViewPointsCommand;
 import ccamanager.command.ViewResidentCommand;
 import ccamanager.command.SortPointsCommand;
 import ccamanager.command.UpdateCcaPointCommand;
+import ccamanager.command.ViewResidentInCcaCommand;
 import ccamanager.enumerations.CcaLevel;
 
 import ccamanager.exceptions.InvalidPointsException;
@@ -206,6 +207,12 @@ public class Parser {
                 return new UnknownCommand("Point cannot be empty.");
             }
             return new UpdateCcaPointCommand(args[0],args[1],args[2]);
+
+        case "view-resident-in-cca":
+            if(args[0].isBlank()){
+                return new UnknownCommand("Cca name cannot be empty");
+            }
+            return new ViewResidentInCcaCommand(args[0]);
         default:
             // This captures cases like "help" (if not caught above) or completely unknown words
             return parseSingleWordFallback(commandWord);

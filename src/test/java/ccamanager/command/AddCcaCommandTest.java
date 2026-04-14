@@ -100,7 +100,8 @@ public class AddCcaCommandTest {
     void execute_addDuplicateCca_listSizeUnchanged() {
         new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui);
         new AddCcaCommand("Chess", CcaLevel.LOW).execute(ccaManager, residentManager, eventManager, ui);
-        new AddCcaCommand("Basketball", CcaLevel.HIGH).execute(ccaManager, residentManager, eventManager, ui); // duplicate
+        new AddCcaCommand("Basketball", CcaLevel.HIGH)
+                .execute(ccaManager, residentManager, eventManager, ui);
 
         assertEquals(2, ccaManager.getCCAList().size());
     }
@@ -113,4 +114,3 @@ public class AddCcaCommandTest {
         assertEquals(1, ccaManager.getCCAList().size());
     }
 }
-
